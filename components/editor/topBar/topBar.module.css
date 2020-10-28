@@ -1,0 +1,55 @@
+.bar {
+  display: flex;
+  flex-direction: row;
+  background-color: #2d3233;
+  width: 100%;
+  align-items: center;
+}
+
+.TS {
+  height: "100%";
+  margin-right: 5px;
+  color: #5098b7;
+  font-size: 0.7em;
+  font-weight: 700;
+}
+
+.JS {
+  height: "100%";
+  margin-right: 5px;
+  color: #cbcb41;
+  font-size: 0.7em;
+  font-weight: 700;
+}
+
+.JSON {
+  height: "100%";
+  margin-right: 5px;
+  color: #c7c741;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.tab {
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  color: #919191;
+  padding: 0.3rem 0.4rem 0.3rem 0.6rem !important;
+  font-size: 0.75rem;
+  font-weight: 400;
+  border-right: 1px solid #252526;
+  background-color: #2d3233;
+}
+
+.tab > .delete {
+  visibility: hidden;
+  font-size: 0.9rem;
+  font-stretch: ultra-condensed;
+  margin-left: 5px;
+  color: gainsboro;
+}
+
+.tab:hover > .delete {
+  visibility: visible;
+}

@@ -1,0 +1,224 @@
+import Editor from "../components/editor/Editor";
+
+# Why TypeScript?
+
+## How your code editor helps you
+
+Your code editor plays an important role in the process of software development.
+Special code editors like VS Code exist to make writing software easier. We have embedded a runnable coding
+environment similar to VS Code to better communicate ideas related to TypeScript.
+
+Hover your cursor (sorry mobile users!) over the word `data` in the editor below.
+
+<Editor
+  id="1"
+  modelsInfo={[
+    {
+      filename: "exportedData.js",
+      value:
+        'const data = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data',
+      language: "javascript",
+      isShown: false,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: false,
+    },
+    {
+      filename: "importData.js",
+      value:
+        'import data from "exportedData"\r\n\r\nconsole.log("You can run this file using the green play button")\r\nconsole.log("Or just press ctrl+enter")',
+      language: "javascript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+You should see this:
+
+<img src="/dataJS.png" />
+
+Knowing the properties of an object can help us write code that uses the object. Maybe I knew there was an **important**
+property, but I forgot that it was called `IMPORTANT_THING`. IntelliSense in VS code increases development
+speed because I don't have to open another file to find the object properties.
+
+We also see that the imported code is unused. Your editor provides all sorts of information.
+
+## TypeScript makes you do extra work (for your own good)
+
+Sometimes changing a file from JavaScript to TypeScript can take some extra code, even if the code does the exact same thing!
+In the JavaScript file below I make an `undefinedVar` by assigning it to a non-existent property of the imported data.
+
+<Editor
+  id="2"
+  modelsInfo={[
+    {
+      filename: "exportedData.js",
+      value:
+        'const data = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data',
+      language: "javascript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: false,
+    },
+    {
+      filename: "makeUndefined.js",
+      value:
+        'import data from "exportedData"\r\n\r\nlet undefinedVar = data.nonExistentProperty\r\nconsole.log(undefinedVar)',
+      language: "javascript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+When I try to run this in TypeScript:
+
+> Property 'nonExistentProperty' does not exist on type '{ thing1: string; thing2: string; IMPORTANT_THING: string; }'.
+
+<Editor
+  id="3"
+  modelsInfo={[
+    {
+      filename: "exportedData.ts",
+      value:
+        'const data = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data',
+      language: "typescript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: false,
+    },
+    {
+      filename: "makeUndefined.ts",
+      value:
+        'import data from "exportedData"\r\n\r\nlet undefinedVar = data.nonExistentProperty\r\nconsole.log(undefinedVar)',
+      language: "typescript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+**To avoid the error I must define a type** that says 'nonExistentProperty might exist'. In the type definition `dataType`
+we have a `nonExistentProperty?: string`, the question mark indicates that the property might not exist.
+
+<Editor
+  id="4"
+  modelsInfo={[
+    {
+      filename: "exportedDataFixed.ts",
+      value:
+        'type dataType = {\n  thing1: string,\n  thing2: string,\n  IMPORTANT_THING: string,\n  nonExistentProperty?: string\n}\n\nconst data: dataType = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data\nexport {dataType}',
+      language: "typescript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+This is TypeScript enforcing a style of coding where developers have to perform some
+minimal documentation on their code in the form of types. It will be useful for future
+maintainers of your code (yourself included!) to know that the object property might
+not exist.
+
+<Editor
+  id="5"
+  modelsInfo={[
+    {
+      filename: "makeUndefinedFixed.ts",
+      value:
+        'import data from "exportedDataFixed"\r\n\r\nlet undefinedVar = data.nonExistentProperty\r\nconsole.log(undefinedVar)',
+      language: "typescript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+See how we can catch errors during when we write the code, not during runtime. This speeds up development.
+
+<Editor
+  id="11"
+  modelsInfo={[
+    {
+      filename: "catchLengthError.ts",
+      value:
+        'import data from "exportedDataFixed"\r\n\r\nconsole.log(data.nonExistentProperty.length)',
+      language: "typescript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+## Passing Things to Functions
+
+When you write a function JavaScript has no clue what the type of the function parameters are (think about why this is true).
+Function parameters will not provide IntelliSense because we never specified the type of the object, and
+the object type can't be inferred.
+
+When we import `data` that the type is inferred and information is displayed on hover, but `myData` is of type `any`.
+That means no autocompletions or hover information in the function body.
+
+<Editor
+  id="6"
+  modelsInfo={[
+    {
+      filename: "importDataFunction.js",
+      value:
+        'import data from "exportedData"\r\nfunction log_IMPORTANT_THING(myData){\r\n  console.log(myData.IMPORTANT_THING)\r\n}\r\nlog_IMPORTANT_THING(data)',
+      language: "javascript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+In TypeScript we can import the type and use it to declare the function parameter type. Hover around to see IntelliSense in
+the function body.
+
+<Editor
+  id="7"
+  modelsInfo={[
+    {
+      filename: "importDataFunction.ts",
+      value:
+        'import data, {dataType} from "exportedDataFixed"\r\nfunction log_IMPORTANT_THING(myData: dataType){\r\n  console.log(myData.IMPORTANT_THING)\r\n}\r\nlog_IMPORTANT_THING(data)',
+      language: "typescript",
+      isShown: true,
+      isReadOnly: false,
+      isTested: false,
+      isInitial: true,
+    },
+  ]}
+/>
+
+## Summary
+
+This is not an exhaustive list of everything TypeScript can help with. Just a few things I observed. You can contribute to the examples on
+[GitHub](https://github.com/Open-EdTech). It is easy to modify the code samples. The green `<>` in the editor copies the modelsInfo prop
+of the editor component to your clipboard, and the text is all markdown.
+
+A lot of JS not TS users have workflows that they are perfectly happy with. I really enjoy the TypeScript workflow because everything
+works the way I want out of the box.
+
+We are working on releasing the embeddable code editor from this article to npm, it isn't perfect but we think
+it is a useful tool for educational purposes.
+
+Written by [Matthew Caseres](https://github.com/MatthewCaseres)

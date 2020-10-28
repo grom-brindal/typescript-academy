@@ -1,0 +1,29 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: flex;
+  position: absolute;
+  background-color: #252526;
+  border: 1px solid #007fd4;
+  min-width: 160px;
+  z-index: 1;
+  margin: 3px;
+}
+
+.dropdownContent input {
+  border: 0;
+  color: #b0b0b0;
+  background-color: #2d3233;
+  outline: none !important;
+}
+
+.dropdownContent select {
+  border: 0px;
+  border-left: 1px solid #007fd4;
+  color: #b0b0b0;
+  background-color: #2d3233;
+  outline: none !important;
+}
