@@ -25,8 +25,11 @@ import {
   setRunnerModel,
 } from "./mountFunctions";
 import { runTestFile } from "./utils/runFile";
-import dynamic from "next/dynamic";
-let ConsoleLog = dynamic(() => import("./consoleLog"), { ssr: false });
+//Can't use next dynamic in npm package? Workaround
+let ConsoleLog;
+if (typeof window !== "undefined") {
+  ConsoleLog = require("./consoleLog").default;
+}
 
 type MonacoEditorProps = {
   id: string;
@@ -109,11 +112,13 @@ function App({
           />
         </div>
         <div style={{ backgroundColor: "#242424" }}>
-          <ConsoleLog
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            editorId={id}
-          ></ConsoleLog>
+          {ConsoleLog && (
+            <ConsoleLog
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              editorId={id}
+            ></ConsoleLog>
+          )}
         </div>
       </div>
     </>

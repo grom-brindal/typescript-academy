@@ -1,6 +1,9 @@
 import circleStyles from "./plusCircle.module.css";
 import dropdownStyles from "./dropdown.module.css";
 import useOnclickOutside from "react-cool-onclickoutside";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
+import AddIcon from "@material-ui/icons/Add";
 import { PlusModelFunc } from "../topBar";
 import { useRef, useState, useEffect } from "react";
 import { modelInfoType } from "../../editorContext";
@@ -23,10 +26,9 @@ export default function NewFileButton({ plusModel }: newFileButtonProps) {
   };
   return (
     <div className={dropdownStyles.dropdown} ref={ref}>
-      <button
-        onClick={() => setOpenMenu(true)}
-        className={`${circleStyles.circle} ${circleStyles.plus}`}
-      ></button>
+      <IconButton size="small" onClick={() => setOpenMenu(true)}>
+        <AddIcon style={{ color: "#787777" }}></AddIcon>
+      </IconButton>
       {openMenu && (
         <div className={dropdownStyles.dropdownContent}>
           <input
