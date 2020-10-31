@@ -24,7 +24,8 @@ import {
   setTheme,
   setRunnerModel,
 } from "./mountFunctions";
-import { runTestFile } from "./utils/runFile";
+import runFile, { runTestFile } from "./utils/runFile";
+import useCtrlRunFile from "./hooks/useCtrlRunFile"
 import dynamic from "next/dynamic";
 const ConsoleLog = dynamic(() => import("./consoleLog"), {
   ssr: false,
@@ -45,6 +46,7 @@ function App({
   onSuccess,
   onFailure,
 }: MonacoEditorProps) {
+  const [ctrlCounter, setControlCounter] =  useState(0)
   const [height, setHeight] = useState(20);
   const [monacoInstance, setMonacoInstance] = useMonaco();
   const [selectedIdx, setSelectedIdx] = useModelIndex();
@@ -65,6 +67,10 @@ function App({
       editorCallbackRef(editor);
       setModelsFromInfo(modelsInfo, monaco, editor, setModels, setSelectedIdx);
       setRunnerModel(monaco, setModels);
+      editor.addCommand(
+        monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
+        () => setControlCounter(count => count + 1)
+      );
 
       let options = monaco.languages.typescript.javascriptDefaults.getCompilerOptions();
       monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -74,6 +80,12 @@ function App({
       });
     });
   };
+
+  useEffect(() => {
+    if(ctrlCounter > 0){
+      runFile(id, monacoInstance, models, selectedIdx, setConsoleMessages)
+    }
+  }, [ctrlCounter])
 
   //Run tests when submission count increases//
   useEffect(() => {

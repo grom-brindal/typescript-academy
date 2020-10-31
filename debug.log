@@ -2,3 +2,4 @@
 [1030/140010.788:ERROR:crash_report_database_win.cc(498)] failed to stat report
 [1030/140010.793:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\matth\AppData\Local\Temp\.profile\Crashpad\reports\15a503d3-4284-4f2f-a11a-89118ecaaba0.dmp: The system cannot find the file specified. (0x2)
 [1030/140010.795:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1031/095500.451:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
