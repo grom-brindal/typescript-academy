@@ -104,8 +104,8 @@ export async function runTestFile(
   models: modelsType | undefined,
   setConsoleMessages: Function
 ) {
-  let testModelIndex = models?.findIndex((model) => model.isTested);
-  if (testModelIndex && testModelIndex !== -1) {
+  let testModelIndex = models?.findIndex((model) => model.tested);
+  if (typeof testModelIndex !== "undefined" && testModelIndex !== -1) {
     await runFile(
       editorId,
       monacoInstance,

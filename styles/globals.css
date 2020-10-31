@@ -6,9 +6,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: blue;
-  text-decoration: underline;
+li::before {
+  display: none;
 }
 
 * {

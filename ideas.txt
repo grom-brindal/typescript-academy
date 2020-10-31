@@ -1,0 +1,30 @@
+Write an article about calling a function from a parent
+
+passing onSuccess or onFailure functions to consoleLog with the closure was such a pain. I am a fool for not tracing the issue more swiftly.
+
+I guess that you don't need var? This sounds like an issue.
+
+It was funny how I didn't catch if if(idx) when idx could be 0.
+
+index signature in typescript
+
+Using optional chaining is really interesting.
+
+This whole dynamic key thing is funny
+https://stackoverflow.com/questions/33194138/template-string-as-object-property-name
+
+So if I pass in some complicated object to a funciton in another file, what am I supposed to do in plain ol JS?
+
+const vs let for something like 
+a = Math.random() > .5 ? "hello" : undefined
+
+nullish coalescing, is implementing a default dictionary a good example?
+
+I like to trick {removed, ...rest} to remove a single item from a dict.
+
+The reason you can't add a type in a destructure is because the syntax is actually renaming when destructuring.
+
+This firebase swr typings are really cool! Generics are rocking my socks.
+
+-----
+implement isRunOnMount

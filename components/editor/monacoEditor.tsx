@@ -25,11 +25,10 @@ import {
   setRunnerModel,
 } from "./mountFunctions";
 import { runTestFile } from "./utils/runFile";
-//Can't use next dynamic in npm package? Workaround
-let ConsoleLog;
-if (typeof window !== "undefined") {
-  ConsoleLog = require("./consoleLog").default;
-}
+import dynamic from "next/dynamic";
+const ConsoleLog = dynamic(() => import("./consoleLog"), {
+  ssr: false,
+});
 
 type MonacoEditorProps = {
   id: string;
@@ -109,6 +108,19 @@ function App({
             }}
             editorDidMount={handleEditorDidMount}
             language="typescript"
+            loading={
+              <div
+                style={{
+                  backgroundColor: "#1E1E1E",
+                  color: "#919191",
+                  paddingBottom: "10px",
+                  width: "100%",
+                  textAlign: "center",
+                }}
+              >
+                Loading...
+              </div>
+            }
           />
         </div>
         <div style={{ backgroundColor: "#242424" }}>

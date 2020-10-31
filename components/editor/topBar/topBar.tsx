@@ -35,11 +35,7 @@ export default function TopBar({ editorId, modelsInfo }: TopBarProps) {
   ) =>
     addNewModel(
       {
-        isInitial: true,
-        isShown: true,
-        isReadOnly: false,
         value: "",
-        isTested: false,
         filename,
         language,
       },
@@ -78,7 +74,7 @@ export default function TopBar({ editorId, modelsInfo }: TopBarProps) {
   //Since this code could go anywhere should I extract a custom hook?
   useEffect(() => {
     if (ctxEditor && models && selectedIdx !== undefined) {
-      ctxEditor.updateOptions({ readOnly: models[selectedIdx].isReadOnly });
+      ctxEditor.updateOptions({ readOnly: models[selectedIdx].readOnly });
     }
   }, [selectedIdx]);
 
@@ -86,7 +82,7 @@ export default function TopBar({ editorId, modelsInfo }: TopBarProps) {
     <div className={styles.bar}>
       {models &&
         models
-          .filter((model) => model.isShown)
+          .filter((model) => !model.shown)
           .map((model, index) => (
             <Tab
               key={index}

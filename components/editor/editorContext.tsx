@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import monacoForTypes, { editor } from "monaco-editor";
 
 export type modelInfoType = {
-  isInitial: boolean;
-  isShown: boolean;
-  isReadOnly: boolean;
-  isTested: boolean;
+  notInitial?: boolean;
+  shown?: boolean;
+  readOnly?: boolean;
+  tested?: boolean;
   filename: string;
   value: string;
   language: "typescript" | "javascript" | "json";

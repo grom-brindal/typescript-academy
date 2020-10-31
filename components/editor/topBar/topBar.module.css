@@ -1,6 +1,7 @@
 .bar {
   display: flex;
   flex-direction: row;
+  height: 33px;
   background-color: #2d3233;
   width: 100%;
   align-items: center;
@@ -32,6 +33,8 @@
 
 .tab {
   display: inline-flex;
+
+  height: 100%;
   cursor: pointer;
   align-items: center;
   color: #919191;

@@ -1,12 +1,22 @@
 import Editor from "../components/editor/Editor";
+import EditorWrapper from "../components/editorWrapper/EditorWrapper";
+import HomeLink from "../components/HomeLink"
+import License from "../components/License"
+
+<HomeLink />
 
 # Why TypeScript?
 
-## How your code editor helps you
+<img
+style={{margin: "0 auto"}}
+          className="self-center flex-1 mt-0 mb-0"
+          src="/WhyTypeScript/ts-js-argue-dark.png"
+          alt="Picture of the author"
+          width={600}
+          height={400}
+        />
 
-Your code editor plays an important role in the process of software development.
-Special code editors like VS Code exist to make writing software easier. We have embedded a runnable coding
-environment similar to VS Code to better communicate ideas related to TypeScript.
+## How your code editor helps you
 
 Hover your cursor (sorry mobile users!) over the word `data` in the editor below.
 
@@ -18,20 +28,12 @@ Hover your cursor (sorry mobile users!) over the word `data` in the editor below
       value:
         'const data = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data',
       language: "javascript",
-      isShown: false,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: false,
     },
     {
       filename: "importData.js",
       value:
         'import data from "exportedData"\r\n\r\nconsole.log("You can run this file using the green play button")\r\nconsole.log("Or just press ctrl+enter")',
       language: "javascript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
@@ -44,11 +46,11 @@ Knowing the properties of an object can help us write code that uses the object.
 property, but I forgot that it was called `IMPORTANT_THING`. IntelliSense in VS code increases development
 speed because I don't have to open another file to find the object properties.
 
-We also see that the imported code is unused. Your editor provides all sorts of information.
+We also see that the imported code is unused. Your editor provides all sorts of information!
 
 ## TypeScript makes you do extra work (for your own good)
 
-Sometimes changing a file from JavaScript to TypeScript can take some extra code, even if the code does the exact same thing!
+Changing a file from JavaScript to TypeScript often requires writing extra code.
 In the JavaScript file below I make an `undefinedVar` by assigning it to a non-existent property of the imported data.
 
 <Editor
@@ -59,20 +61,12 @@ In the JavaScript file below I make an `undefinedVar` by assigning it to a non-e
       value:
         'const data = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data',
       language: "javascript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: false,
     },
     {
       filename: "makeUndefined.js",
       value:
         'import data from "exportedData"\r\n\r\nlet undefinedVar = data.nonExistentProperty\r\nconsole.log(undefinedVar)',
       language: "javascript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
@@ -89,26 +83,18 @@ When I try to run this in TypeScript:
       value:
         'const data = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data',
       language: "typescript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: false,
     },
     {
       filename: "makeUndefined.ts",
       value:
         'import data from "exportedData"\r\n\r\nlet undefinedVar = data.nonExistentProperty\r\nconsole.log(undefinedVar)',
       language: "typescript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
 
 **To avoid the error I must define a type** that says 'nonExistentProperty might exist'. In the type definition `dataType`
-we have a `nonExistentProperty?: string`, the question mark indicates that the property might not exist.
+we have a `nonExistentProperty?: string`, the question mark indicates that the property may or may not exist.
 
 <Editor
   id="4"
@@ -118,10 +104,6 @@ we have a `nonExistentProperty?: string`, the question mark indicates that the p
       value:
         'type dataType = {\n  thing1: string,\n  thing2: string,\n  IMPORTANT_THING: string,\n  nonExistentProperty?: string\n}\n\nconst data: dataType = {\n  thing1: "a thing",\n  thing2: "another thing",\n  IMPORTANT_THING: "What you were looking for"\n}\n\nexport default data\nexport {dataType}',
       language: "typescript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
@@ -139,10 +121,6 @@ not exist.
       value:
         'import data from "exportedDataFixed"\r\n\r\nlet undefinedVar = data.nonExistentProperty\r\nconsole.log(undefinedVar)',
       language: "typescript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
@@ -150,17 +128,13 @@ not exist.
 See how we can catch errors during when we write the code, not during runtime. This speeds up development.
 
 <Editor
-  id="11"
+  id="200"
   modelsInfo={[
     {
       filename: "catchLengthError.ts",
       value:
         'import data from "exportedDataFixed"\r\n\r\nconsole.log(data.nonExistentProperty.length)',
       language: "typescript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
@@ -182,10 +156,6 @@ That means no autocompletions or hover information in the function body.
       value:
         'import data from "exportedData"\r\nfunction log_IMPORTANT_THING(myData){\r\n  console.log(myData.IMPORTANT_THING)\r\n}\r\nlog_IMPORTANT_THING(data)',
       language: "javascript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
     },
   ]}
 />
@@ -201,10 +171,66 @@ the function body.
       value:
         'import data, {dataType} from "exportedDataFixed"\r\nfunction log_IMPORTANT_THING(myData: dataType){\r\n  console.log(myData.IMPORTANT_THING)\r\n}\r\nlog_IMPORTANT_THING(data)',
       language: "typescript",
-      isShown: true,
-      isReadOnly: false,
-      isTested: false,
-      isInitial: true,
+    },
+  ]}
+/>
+
+## Refactoring
+
+When changing a piece of code in JS it can be difficult to figure out all of the dependent pieces of
+code that also need to be changed. Suppose we want to remove the field `fullName` from the following code.
+We have to delete the field from each element of `data`.
+
+Then we have to look into `namePrinterJS` to see
+that there is a reference to a deleted field. JavaScript has no clue the field has been deleted, and our code
+will have a new bug.
+In addition we didn't declare the variable fullNameList, which is a thing you can do in JavaScript and it will
+overwrite global variables.
+
+<Editor
+  id="8"
+  modelsInfo={[
+    {
+      value:
+        'const data = [\r\n  {\r\n    firstName: "Eric",\r\n    lastName: "Cartman",\r\n    fullName: "Eric Cartman"\r\n  },\r\n  {\r\n    firstName: "Kyle",\r\n    lastName: "Broflovski",\r\n    fullName: "Kyle Broflovski"\r\n  },\r\n  {\r\n    firstName: "Stan",\r\n    lastName: "Marsh",\r\n    fullName: "Stan Marsh"\r\n  }\r\n]\r\n\r\nexport {data}',
+      filename: "dataStoreJS.js",
+      language: "javascript",
+    },
+    {
+      value:
+        'import {data} from "dataStoreJS"\r\n\r\nfunction printNames(allNames) {\r\n  fullNameList = allNames.map(name => name.fullName)\r\n  console.log(fullNameList.join(", "))\r\n}\r\nprintNames(data)',
+      filename: "namePrinterJS.js",
+      language: "javascript",
+      notInitial: true,
+    },
+  ]}
+/>
+
+In TypeScript I can modify my type definition and all code that contradicts my new type definition will
+give an error. Maybe for fun you can fix the code.
+
+<EditorWrapper
+  id="9"
+  modelsInfo={[
+    {
+      value:
+        'type nameType = {\r\n  firstName: string,\r\n  lastName: string,\r\n}\r\n//TODO: remove fullName field\r\nconst data: nameType[] = [\r\n  {\r\n    firstName: "Eric",\r\n    lastName: "Cartman",\r\n    fullName: "Eric Cartman"\r\n  },\r\n  {\r\n    firstName: "Kyle",\r\n    lastName: "Broflovski",\r\n    fullName: "Kyle Broflovski"\r\n  },\r\n  {\r\n    firstName: "Stan",\r\n    lastName: "Marsh",\r\n    fullName: "Stan Marsh"\r\n  }\r\n]\r\n\r\nexport {data, nameType}',
+      filename: "dataStoreTS.ts",
+      language: "typescript",
+    },
+    {
+      value:
+        'import {data, nameType} from "dataStoreTS"\r\n//TODO: Redo calculation using name.firstName and name.lastName.\r\n//TODO: Submit problem using button below\r\nfunction printNames(allNames: nameType[]) {\r\n  const fullNameList = allNames.map(name => name.fullName)\r\n  return fullNameList.join(", ")\r\n}\r\n\r\nexport {printNames}',
+      filename: "namePrinterTS.ts",
+      language: "typescript",
+    },
+    {
+      value:
+        'import {printNames} from "namePrinterTS"\r\nimport {data} from "dataStoreTS"\r\n\r\nif(printNames(data) !== "Eric Cartman, Kyle Broflovski, Stan Marsh"){\r\n  throw {returned: printNames(data), expected: "Eric Cartman, Kyle Broflovski, Stan Marsh"}\r\n}\r\nconsole.log("Problem solved")',
+      filename: "tests.ts",
+      language: "typescript",
+      notInitial: true,
+      tested: true,
     },
   ]}
 />
@@ -221,4 +247,6 @@ works the way I want out of the box.
 We are working on releasing the embeddable code editor from this article to npm, it isn't perfect but we think
 it is a useful tool for educational purposes.
 
-Written by [Matthew Caseres](https://github.com/MatthewCaseres)
+<License />
+
+<HomeLink />

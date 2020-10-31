@@ -102,7 +102,7 @@ export function addNewModel(
       ] as modelsType
   );
   //The last model with initial true should be initial
-  if (modelInfo.isInitial) {
+  if (!modelInfo.notInitial) {
     editor.setModel(model);
     setSelectedIdx(modelIndex);
   }
