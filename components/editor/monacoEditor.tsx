@@ -67,6 +67,7 @@ function App({
       editorCallbackRef(editor);
       setModelsFromInfo(modelsInfo, monaco, editor, setModels, setSelectedIdx);
       setRunnerModel(monaco, setModels);
+      //Trigger useEffect with the control counter
       editor.addCommand(
         monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
         () => setControlCounter(count => count + 1)
@@ -81,6 +82,7 @@ function App({
     });
   };
 
+  //Gets triggered on ctrl+enter, hack to avoid getting trapped in closures.
   useEffect(() => {
     if(ctrlCounter > 0){
       runFile(id, monacoInstance, models, selectedIdx, setConsoleMessages)
