@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Ehh from "YOUR_PACKAGE_NAME";
 import Editor from "../components/editor/Editor";
 
 
