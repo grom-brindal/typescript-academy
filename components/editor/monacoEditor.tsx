@@ -72,7 +72,7 @@ function App({
         monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
         () => setControlCounter(count => count + 1)
       );
-
+      monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
       let options = monaco.languages.typescript.javascriptDefaults.getCompilerOptions();
       monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
         ...options,

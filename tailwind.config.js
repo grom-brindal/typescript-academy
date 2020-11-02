@@ -15,6 +15,9 @@ module.exports = {
           h2: {
             color: "white",
           },
+          h3: {
+            color: "white",
+          },
           strong: {
             color: "white",
           },
@@ -26,6 +29,21 @@ module.exports = {
           },
           a: {
             color: "#007acc",
+          },
+          li: {
+            "&:before": {
+              display: "none",
+            },
+          },
+          code: {
+            "&:before": {
+              display: "none",
+            },
+            "&:after": {
+              display: "none",
+            },
+            backgroundColor: "#2e3842",
+            padding: "1px 4px",
           },
         },
       },
