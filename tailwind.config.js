@@ -43,6 +43,7 @@ module.exports = {
               display: "none",
             },
             backgroundColor: "#2e3842",
+            color: "white",
             padding: "1px 4px",
           },
         },
