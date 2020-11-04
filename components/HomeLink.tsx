@@ -19,7 +19,7 @@ export default function HomeLink() {
             margin: "20px 0px 45px 0px",
           }}
         >
-          Open EdTech
+          TS Academy
         </h2>
       </Link>
       <div
