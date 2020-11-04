@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 // import GitHubButton from "react-github-btn"
 const GitHubButton = dynamic(() => import("react-github-btn"), {
   ssr: false,
-  loading: () => <span></span>
+  loading: () => <span></span>,
 });
 
 export default function HomeLink() {
@@ -27,20 +27,23 @@ export default function HomeLink() {
       >
         <GitHubButton
           href="https://github.com/Open-EdTech/typescript-website"
-          data-color-scheme="no-preference: dark; light: light; dark: dark;"
+          data-color-scheme="no-preference: light; light: light; dark: light;"
           data-icon="octicon-star"
+          data-size="large"
           data-show-count={true}
           aria-label="Star Open-EdTech/typescript-website on GitHub"
         >
           Star
         </GitHubButton>
         <GitHubButton
-          href="https://github.com/Open-EdTech"
-          data-color-scheme="no-preference: dark; light: light; dark: dark;"
+          href="https://github.com/Open-EdTech/typescript-academy/fork"
+          data-color-scheme="no-preference: light; light: light; dark: light;"
+          data-icon="octicon-repo-forked"
+          data-size="large"
           data-show-count={true}
-          aria-label="Follow @Open-EdTech on GitHub"
+          aria-label="Fork Open-EdTech/typescript-academy on GitHub"
         >
-          Follow @Open-EdTech
+          Fork
         </GitHubButton>
       </div>
     </div>
