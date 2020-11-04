@@ -77,7 +77,7 @@ function App({
       monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
         ...options,
         strict: true,
-        allowJs: true,
+        noImplicitAny: true,
       });
     });
   };

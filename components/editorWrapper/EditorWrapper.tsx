@@ -46,7 +46,7 @@ export default function EditorWrapper({
       />
       <div className="flex-row flex align-middle">
         <button
-          className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-1 rounded"
+          className="bg-blue-800 hover:bg-blue-900 text-white font-bold py-1 px-4 mt-1 rounded"
           onClick={() => setSubmissionCount((count) => count + 1)}
         >
           Grade Problem
