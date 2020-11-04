@@ -31,9 +31,7 @@ module.exports = {
             color: "#007acc",
           },
           li: {
-            "&:before": {
-              display: "none",
-            },
+            color: "white"
           },
           code: {
             "&:before": {
@@ -51,5 +49,8 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/custom-forms"),
+  ],
 };

@@ -46,7 +46,7 @@ const LogsContainer = ({
 
   return (
     
-    <div style={{ backgroundColor: "#242424" }}>
+    <div className="log" style={{ backgroundColor: "#242424" }}>
       <Console
         logs={logs as any[]}
         styles={{ BASE_FONT_SIZE: 13 }}
