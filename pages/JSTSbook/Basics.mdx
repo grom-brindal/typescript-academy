@@ -2,19 +2,121 @@ import Editor from "../../components/editor/Editor";
 import EditorWrapper from "../../components/editorWrapper/EditorWrapper";
 import HomeLink from "../../components/HomeLink"
 import License from "../../components/License"
+import MCQ from "../../components/mcq/MCQ"
 
 <HomeLink />
 
-# Prerequisites
+# Getting Started
+
+<img
+style={{margin: "0 auto"}}
+  className="self-center flex-1 mt-0 mb-0"
+  src="/JSTSbook/VarsAndStrings/Listen! header.png"
+  alt="ts error"
+/>
+
+## What is JavaScript?
+
+JavaScript is a programming language that can run inside a web browser. 
+Web browsers don't generally run Python or Java so it is necessary for web developers to know JavaScript. 
+JavaScript also runs outside the web browser. JavaScript should cover your needs as a web developer. 
+
+### ECMAScript?
+
+JavaScript is a language that has changed over time. The organization responsible for making changes to JavaScript is 
+Ecma International, formerly known as the European Computer Manufacturers Association (ECMA). 
+A new JavaScript specification has been coming out every year for the last few years. The specification 
+is actually called the ECMAScript specification. Usually JavaScript and ECMAScript can be used interchangeably.
+
+JavaScript is a general way of talking about the language, if you want to be specific about which specification
+you are talking about say something like "ECMAScript 2020". The naming conventions are confusing. 
+ES6, ES2015, and ECMAScript 2015 all refer to the 6th edition of the ECMAScript
+specification, ECMAScript 2015.
+
+### Differences in browsers
+
+Because there are multiple versions of JavaScript, different web browsers run different versions. To be more precise, 
+ECMAScript is a specification and the web browser is responsible for implementing its own JavaScript engine based on 
+the specification.
+
+All major browsers work with ECMAScript 2011 (ES5) but not all browsers work well with ECMAScript 2015 (ES6), most 
+notably Internet Explorer. This website shouldn't work on Internet Explorer because I used an ES6 feature.
+
+### Transpilation
+
+There is a program called Babel that takes new JavaScript and turns it into old ES5 JavaScript, usually this is done 
+to run your new code on old browsers.
+The process of turning one programming language into a similar language is called *transpilation*.
+
+## What is TypeScript?
+
+Just like we can take new JavaScript and turn it into old JavaScript, we can take a programming language called 
+TypeScript and transpile it to JavaScript. TypeScript doesn't run in web browsers, so this conversion is necessary.
 
 <img
 style={{margin: "0 auto"}}
           className="self-center flex-1 mt-0 mb-0"
-          src="/JSTSbook/VarsAndStrings/Listen! header.png"
+          src="/JSTSbook/VarsAndStrings/ts to js.png"
           alt="ts error"
         />
 
-## Displaying Output
+In JavaScript errors happen while the program is executing, these are called runtime errors. 
+In TypeScript errors can happen during the conversion from 
+JavaScript to TypeScript, before any JavaScript has been executed. These are called *compile* time errors.
+
+### Your first TypeScript Error
+
+Here is valid JavaScript, don't worry about what it does. 
+You can run it using the green play button in the top right. It should print "ello mate".
+
+<Editor
+  id="-100"
+  modelsInfo={[{"value":"const hello = (greeting) => {console.log(greeting)}\r\nhello(\"ello mate\")","filename":"noError.js","language":"javascript"}]}
+/>
+
+When we try to run the code in TypeScript it says <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+Parameter 'greeting' implicitly has an 'any' type.</code>
+
+<Editor
+  id="-99"
+  modelsInfo={[{"value":"const hello = (greeting) => {console.log(greeting)}\r\nhello(\"ello mate\")","filename":"yesError.ts","language":"typescript"}]}
+/>
+
+The error happened because TypeScript wanted us to give it more information. It wanted to know if our greeting was 
+a word or if it was a number. Since we didn't specify this, TypeScript got upset with us.
+
+### IntelliSense
+
+
+You can hover over (put your cursor on top of) the red squiggly lines under 
+`greeting` in line 1 to see a popup.
+
+<Editor
+  id="-98"
+  modelsInfo={[{"value":"const hello = (greeting) => {console.log(greeting)}\r\nhello(\"ello mate\")","filename":"yesError.ts","language":"typescript"}]}
+/>
+
+It should look like this:
+
+<img
+style={{margin: "0 auto"}}
+          className="self-center flex-1 mt-0 mb-0"
+          src="/JSTSbook/VarsAndStrings/ts-implicit-any.png"
+          alt="ts error"
+        />
+
+This is called **IntelliSense**. "IntelliSense" is the things your editor helps you with in 
+Visual Studio Code. The main reason 
+TypeScript asks for more information than JavaScript is to help the editor help you with improved IntelliSense. 
+TypeScript forces you to help the editor help you.
+More on this throughout the book.
+
+### TypeScript in This Course
+
+The authors of this book love TypeScript, so we teach it. We use both 
+TypeScript and JavaScript files, you should be comfortable working in both languages. TypeScript and JavaScript are very similar.
+
+## console.log
 
 To do these tutorials you will need to run code and see the results. Run the code below by either pressing the green play button (on the far right of the light gray bar),
 or press `ctrl` and `enter` at the same time after clicking into the text box.
@@ -24,11 +126,11 @@ or press `ctrl` and `enter` at the same time after clicking into the text box.
   modelsInfo={[{"filename":"helloWorld.ts","value":"console.log(\"hello world\")","language":"typescript"}]}
 />
 
-`console.log("hello world")` prints hello world. You can console log all sorts of words, play around!
+`console.log("hello world")` prints hello world to the console below the editor. You can console log all sorts of words, play around!
 
 <Editor
   id="2"
-  modelsInfo={[{"filename":"allSorts.ts","value":"console.log(\"This 👌 tutorial 🔈🔈 is 💦 so 💯 fire 🔥🔥\")","language":"typescript"}]}
+  modelsInfo={[{"filename":"allSorts.ts","value":"console.log(\"all❔ sorts😤🚠 of👥👳🏿🈲💪 words🕖⏪\")","language":"typescript"}]}
 />
 
 ## Comments
@@ -40,147 +142,35 @@ Sometimes we want to say something inside the code without it effecting how the 
   modelsInfo={[{"filename":"comments.ts","value":"// Single line comment\r\nconsole.log(\"Code not impacted by comments\")\r\n/* Multiline comment\r\n         _          __________                              _,\r\n     _.-(_)._     .\"          \".      .--\"\"--.          _.-{__}-._\r\n   .'________'.   | .--------. |    .'        '.      .:-'`____`'-:.\r\n  [____________] /` |________| `\\  /   .'``'.   \\    /_.-\"`_  _`\"-._\\\r\n  /  / .\\/. \\  \\|  / / .\\/. \\ \\  ||  .'/.\\/.\\'.  |  /`   / .\\/. \\   `\\\r\n  |  \\__/\\__/  |\\_/  \\__/\\__/  \\_/|  : |_/\\_| ;  |  |    \\__/\\__/    |\r\n  \\            /  \\            /   \\ '.\\    /.' / .-\\                /-.\r\n  /'._  --  _.'\\  /'._  --  _.'\\   /'. `'--'` .'\\/   '._-.__--__.-_.'   \\\r\n /_   `\"\"\"\"`   _\\/_   `\"\"\"\"`   _\\ /_  `-./\\.-'  _\\'.    `\"\"\"\"\"\"\"\"`    .'`\\\r\n(__/    '|    \\ _)_|           |_)_/            \\__)|        '       |   |\r\n   via https://textfancy.com/gallery/\r\n   */","language":"typescript"}]}
 />
 
-## Declaring Variables
+*** 
 
-Variables let you store a `value` and reuse it in different parts of your code. A `value` is just some piece of information stored in your 
-computer. There are different types of values (like numbers), but we will focus on letters inside quotation marks for now. 
-The two good ways to **declare** a variable are using the words `let` and `const`, we will talk about the bad ways later.
+## Exercises
 
-<Editor
-  id="4"
-  modelsInfo={[{"filename":"makeVars.js","value":"let var1 = \"from let\"\r\nconst var2 = \"from const\"\r\n//variables are stored in the variable names\r\nconsole.log(var1)\r\nconsole.log(var2)","language":"javascript"}]}
-/>
+<ol>
+  <li>
+    <MCQ info={{"promptText":"Which programming languages run in all major browsers?","solutionText":"JavaScript is the only language that the browser runs. Other languages \nhave to translate into JavaScript (or something called WebAssembly) before they can run in the browser.","answersText":["JavaScript and TypeScript","JavaScript and Java","JavaScript","JavaScript and Python"],"correctIndex":2}}/>
+  </li>
+  <li>
+    <MCQ info={{"promptText":"You wrote a website using ECMAScript 2015 (ES6) but it doesn't work on Internet Explorer. Which of the following should you do?","solutionText":"Microsoft no longer supports Internet Explorer, they are focusing on building the Edge browser and they will not fix your problem.  \nTranspiling your code to ES5 is faster and less likely to introduce bugs than rewriting the code by hand.  \nOn this website I simply tell users to not use Internet Explorer. Shame on me!","answersText":["Call Microsoft support center.","Transpile the ES6 code to ECMAScript 2009 (ES5) using Babel","Explain to users that they should not be using Internet Explorer","Rewrite all of the code using ES5"],"correctIndex":1}}/>
+  </li>
+  <li>
+    <MCQ info={{"promptText":"Which is a good reason to use TypeScript?","solutionText":"We said earlier that TypeScript makes you write code to improve the IntelliSense. It is true that if you take a JavaScript file and convert it to a \nTypeScript file there will be new compile-time errors, but I'm not sure I would call these bugs. These are more like features of TypeScript.  \nDoing stuff because it is trendy isn't a good way to make decisions. ","answersText":["It enforces a style of code that provides developers with improved IntelliSense.","It introduces new bugs to your code.","People that write TypeScript are cool. 😎"],"correctIndex":0}}/>
+  </li>
+  <li>
+    <p>
+      Log "Problem solved" to the console. Pay attention to capitalization, "problem solved" will not work.
+    </p>
+    <EditorWrapper
+      id="dskl"
+      modelsInfo={[{"filename":"logProblemSolved.ts","value":"//This is a comment","language":"typescript","tested":true}]}
+    />
+    <p>
+      Our editor detects that a problem has been solved when the message "Problem solved" is logged.
+      You can cheat problems on this site by doing this, but why cheat yourself out of knowledge?
+    </p>
+  </li>
+</ol>
 
-You cannot declare a variable twice, run the code to see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
-SyntaxError: Identifier 'var1' has already been declared</code>
-
-<Editor
-  id="-3"
-  modelsInfo={[{"filename":"noDoubleDeclare.js","value":"let var1 = \"declare once\"\r\nlet var1 = \"declare twice\"","language":"javascript"}]}
-/>
-
-TypeScript will tell you that the code will not work **BEFORE** you run the code. Notice that the file is a TypeScript file,
-pay attention to this when using this website! Hover your cursor over `var1` to see the error message.
-
-<Editor
-  id="-4"
-  modelsInfo={[{"filename":"noDoubleDeclare.ts","value":"let var1 = \"declare once\"\r\nlet var1 = \"declare twice\"","language":"typescript"}]}
-/>
-
-You should have seen something like this: 
-
-<img
-style={{margin: "0 auto"}}
-          className="self-center flex-1 mt-0 mb-0"
-          src="/JSTSbook/VarsAndStrings/TS-redeclare-error.png"
-          alt="ts error"
-        />
-
-## Assigning Variables
-
-After you declare a variable using `let` you can **assign** the variable by setting it equal to another value WITHOUT saying **let** again.
-
-<Editor
-  id="-2"
-  modelsInfo={[{"filename":"reassign.js","value":"let var1 = \"Use let to declare var1\"\r\nvar1 = \"no let the second time you use the variable!\"","language":"javascript"}]}
-/>
-
-### let vs. const
-
-Sometimes things shouldn't change, you can enforce and communicate this by using `const`.
-
-<Editor
-  id="5"
-  modelsInfo={[{"filename":"goodConst.js","value":"let age = \"10\" //age can change\r\nconst birthday = \"April 1\" //birthday can't change","language":"javascript"}]}
-/>
-
-The difference between `let` and `const` is that you can reassign `let` but not `const`. Run the code below to see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
-TypeError: Assignment to constant variable.</code> Notice that `fromLet` gets printed before the error because the error happens after the `console.log`.
-
-<Editor
-  id="6"
-  modelsInfo={[{"filename":"cantReassignConst.js","value":"let fromLet = \"from let\"\r\nconst fromConst = \"from const\"\r\nfromLet = \"reassign let\"\r\nconsole.log(fromLet)\r\nfromConst = \"this will cause an error\"","language":"javascript"}]}
-/>
-
-TypeScript will show an error with red squiggly lines. Hover your cursor over the error for more information.
-Run the code to see an error, but this time the `console.log` in line 4 doesn't run. This is because TypeScript checks for 
-any red squiggly lines (syntax errors) before it runs your code.
-
-<Editor
-  id="7"
-  modelsInfo={[{"filename":"cantReassignConst.ts","value":"let fromLet = \"from let\"\r\nconst fromConst = \"from const\"\r\nfromLet = \"reassign let\"\r\nconsole.log(fromLet)\r\nfromConst = \"this will cause an error\"","language":"typescript"}]}
-/>
-
-## TypeScript in this course
-
-We want you to be comfortable in both JavaScript and TypeScript, so we 
-include both languages in our examples and exercises. From your perspective TypeScript is a version of JavaScript that refuses to run your code 
-unless you follow certain extra rules. 
-
-TypeScript's extra rules cause some errors with our editor.
-Often we multiple files, notice the tabs. TypeScript treats these separate files as if 
-they were a single file when checking for errors, so we see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
-Cannot redeclare block-scoped variable 'error'.</code>
-
-<Editor
-  id="8"
-  modelsInfo={[{"filename":"file1.ts","value":"let error = \"I'm in file 1\"","language":"typescript"},{"value":"let error = \"I'm in file 2\"","filename":"file2.ts","language":"typescript"}]}
-/>
-
-This is the same error we got in this file.
-
-<Editor
-  id="-4"
-  modelsInfo={[{"filename":"noDoubleDeclare.ts","value":"let var1 = \"declare once\"\r\nlet var1 = \"declare twice\"","language":"typescript"}]}
-/>
-
-You can pretend that all declarations belong to the same file for purposes of understanding errors.
-Unless that file is a module (see below).
-
-## Modules
-
-The [TypeScript handbook](https://www.typescriptlang.org/docs/handbook/modules.html) states: 
-
-> a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well).
-
-This explains our error, the variable is declared twice in the global scope. Files with 
-import or export statements are called modules.
-
-<Editor
-  id="9"
-  modelsInfo={[{"filename":"module.ts","value":"let noError = \"I'm in a module, look below\"\r\n\r\nexport {noError}","language":"typescript"}]}
-/>
-
-Variable declarations in a module are isolated to that module. See that the file below is not a module. Duplicate declarations will cause errors,
-`error` is a duplicate declaration because it was defined in `file2.ts` which is also not a module. There is no error for `noError` because it was 
-previously defined in a module and it's declaration in that module is isolated.
-
-<Editor
-  id="10"
-  modelsInfo={[{"filename":"file3.ts","value":"let error = \"still an error\"\r\nlet noError = \"I can't see the declaration in the module above, no error\"","language":"typescript"}]}
-/>
-
-If something is exported from a module we can `import` and use it in other files. This helps us organize our code.
-
-<Editor
-  id="11"
-  modelsInfo={[{"filename":"import.ts","value":"import { noError } from \"module\" //Use the file name to import\r\n//We can use the value now\r\nconsole.log(noError)","language":"typescript"}]}
-/>
-
-
-## How does TypeScript work on the web?
-The TypeScript compiler turns TypeScript into the equivalent JavaScript.
-Web browsers run JavaScript, they do NOT run TypeScript, so this is needed to run the TypeScript in the browser. 
-The formal term for this conversion process is "transpilation". Weird that a "compiler" "transpiles".
-
-<img
-style={{margin: "0 auto"}}
-          className="self-center flex-1 mt-0 mb-0"
-          src="/JSTSbook/VarsAndStrings/ts to js.png"
-          alt="ts error"
-        />
-
-<div style={{margin: 40}} />
 
 <License />
 

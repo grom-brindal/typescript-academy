@@ -1,12 +1,172 @@
-# hello
+import Editor from "../../components/editor/Editor";
+import EditorWrapper from "../../components/editorWrapper/EditorWrapper";
+import HomeLink from "../../components/HomeLink"
+import License from "../../components/License"
 
-### How to Make a String
+# Strings and Numbers
 
-You can make strings using single quotes, double quotes, or backticks.
+## Declaring Variables
+
+Variables let you store a `value` and reuse it in different parts of your code. A `value` is just some piece of information stored in your 
+computer. There are different types of values (like numbers), but we will focus on letters inside quotation marks for now. 
+The two good ways to **declare** a variable are using the words `let` and `const`, we will talk about the bad ways later.
+
+<Editor
+  id="4"
+  modelsInfo={[{"filename":"makeVars.js","value":"let var1 = \"from let\"\r\nconst var2 = \"from const\"\r\n//variables are stored in the variable names\r\nconsole.log(var1)\r\nconsole.log(var2)","language":"javascript"}]}
+/>
+
+You cannot declare a variable twice, run the code to see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+SyntaxError: Identifier 'var1' has already been declared</code>
+
+<Editor
+  id="-3"
+  modelsInfo={[{"filename":"noDoubleDeclare.js","value":"let var1 = \"declare once\"\r\nlet var1 = \"declare twice\"","language":"javascript"}]}
+/>
+
+TypeScript will tell you that the code will not work **BEFORE** you run the code. Notice that the file is a TypeScript file,
+pay attention to this when using this website! Hover your cursor over `var1` to see the error message.
+
+<Editor
+  id="-4"
+  modelsInfo={[{"filename":"noDoubleDeclare.ts","value":"let var1 = \"declare once\"\r\nlet var1 = \"declare twice\"","language":"typescript"}]}
+/>
+
+You should have seen something like this: 
+
+<img
+style={{margin: "0 auto"}}
+          className="self-center flex-1 mt-0 mb-0"
+          src="/JSTSbook/VarsAndStrings/TS-redeclare-error.png"
+          alt="ts error"
+        />
+
+## Assigning Variables
+
+After you declare a variable using `let` you can **assign** the variable by setting it equal to another value WITHOUT saying **let** again.
+
+<Editor
+  id="-2"
+  modelsInfo={[{"filename":"reassign.js","value":"let var1 = \"Use let to declare var1\"\r\nvar1 = \"no let the second time you use the variable!\"","language":"javascript"}]}
+/>
+
+### let vs. const
+
+Sometimes things shouldn't change, you can enforce and communicate this by using `const`.
+
+<Editor
+  id="5"
+  modelsInfo={[{"filename":"goodConst.js","value":"let age = \"10\" //age can change\r\nconst birthday = \"April 1\" //birthday can't change","language":"javascript"}]}
+/>
+
+The difference between `let` and `const` is that you can reassign `let` but not `const`. Run the code below to see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+TypeError: Assignment to constant variable.</code> Notice that `fromLet` gets printed before the error because the error happens after the `console.log`.
+
+<Editor
+  id="6"
+  modelsInfo={[{"filename":"cantReassignConst.js","value":"let fromLet = \"from let\"\r\nconst fromConst = \"from const\"\r\nfromLet = \"reassign let\"\r\nconsole.log(fromLet)\r\nfromConst = \"this will cause an error\"","language":"javascript"}]}
+/>
+
+TypeScript will show an error with red squiggly lines. Hover your cursor over the error for more information.
+Run the code to see an error, but this time the `console.log` in line 4 doesn't run. This is because TypeScript checks for 
+any red squiggly lines (syntax errors) before it runs your code.
+
+<Editor
+  id="7"
+  modelsInfo={[{"filename":"cantReassignConst.ts","value":"let fromLet = \"from let\"\r\nconst fromConst = \"from const\"\r\nfromLet = \"reassign let\"\r\nconsole.log(fromLet)\r\nfromConst = \"this will cause an error\"","language":"typescript"}]}
+/>
+
+## TypeScript in this course
+
+We want you to be comfortable in both JavaScript and TypeScript, so we 
+include both languages in our examples and exercises. From your perspective TypeScript is a version of JavaScript that refuses to run your code 
+unless you follow certain extra rules. 
+
+TypeScript's extra rules cause some errors with our editor.
+Often we multiple files, notice the tabs. TypeScript treats these separate files as if 
+they were a single file when checking for errors, so we see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+Cannot redeclare block-scoped variable 'error'.</code>
+
+<Editor
+  id="8"
+  modelsInfo={[{"filename":"file1.ts","value":"let error = \"I'm in file 1\"","language":"typescript"},{"value":"let error = \"I'm in file 2\"","filename":"file2.ts","language":"typescript"}]}
+/>
+
+This is the same error we got in this file.
+
+<Editor
+  id="-4"
+  modelsInfo={[{"filename":"noDoubleDeclare.ts","value":"let var1 = \"declare once\"\r\nlet var1 = \"declare twice\"","language":"typescript"}]}
+/>
+
+You can pretend that all declarations belong to the same file for purposes of understanding errors.
+Unless that file is a module (see below).
+
+## Modules
+
+The [TypeScript handbook](https://www.typescriptlang.org/docs/handbook/modules.html) states: 
+
+> a file without any top-level import or export declarations is treated as a script whose contents are available in the global scope (and therefore to modules as well).
+
+This explains our error, the variable is declared twice in the global scope. Files with 
+import or export statements are called modules.
 
 <Editor
   id="9"
-  modelsInfo={[{"filename":"makeString.js","value":"console.log(typeof \"I'm a string\")\r\nconsole.log(typeof 2)","language":"javascript"}]}
+  modelsInfo={[{"filename":"module.ts","value":"let noError = \"I'm in a module, look below\"\r\n\r\nexport {noError}","language":"typescript"}]}
+/>
+
+Variable declarations in a module are isolated to that module. The file below is not a module, it has no import or export statements. Duplicate declarations will cause errors,
+`error` defined in the previous section in `file2.ts` which is also not a module. There is no error for `noError` from `module.ts`. It's declaration in that module is known only in the module.
+
+<Editor
+  id="10"
+  modelsInfo={[{"filename":"file3.ts","value":"let error = \"still an error\"\r\nlet noError = \"I can't see the declaration in the module above, no error\"","language":"typescript"}]}
+/>
+
+If something is exported from a module we can `import` and use it in other files. This helps us organize our code.
+
+<Editor
+  id="11"
+  modelsInfo={[{"filename":"import.ts","value":"import { noError } from \"module\" //Use the file name to import\r\n//We can use the value now\r\nconsole.log(noError)","language":"typescript"}]}
+/>
+
+
+
+<div style={{margin: 40}} />
+
+## Viewing Data Types
+
+Every *value* in the previous section was created with double quotes `""`, these are of type `string`. A value can also be a number. 
+You can ask for the type of a value with `typeof`.
+
+<Editor
+  id="1"
+  modelsInfo={[{"filename":"typeof.js","value":"console.log(typeof \"I'm a string\")\r\nconsole.log(typeof 2)","language":"javascript"}]}
+/>
+
+You can hover over a variable to see what type it is. This way you don't have to run the code and console log to find the type.
+
+<Editor
+  id="2"
+  modelsInfo={[{"filename":"hoverType.js","value":"let hoverString = \"Hover the variable!\"\r\nlet hoverNumber = \"Me too! Me too!\"","language":"javascript"}]}
+/>
+
+You should see something like this:
+
+<img
+style={{margin: "0 auto"}}
+          className="self-center flex-1 mt-0 mb-0"
+          src="/JSTSbook/VarsAndStrings/hoverString.png"
+          alt="ts error"
+        />
+
+The editor is smart and can tell what type things are. In TypeScript that information is used to enforce a consistent type for the variable. <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+Type '2' is not assignable to type 'string'.</code> More on this later.
+
+<Editor
+  id="3"
+  modelsInfo={[{"filename":"curious.ts","value":"let hoverString = \"Hover the variable!\"\r\nlet hoverNumber = \"Me too! Me too!\"","language":"typescript"}]}
 />
 
 ### What is a String
