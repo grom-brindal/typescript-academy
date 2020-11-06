@@ -3,6 +3,7 @@ import EditorWrapper from "../../components/editorWrapper/EditorWrapper";
 import HomeLink from "../../components/HomeLink"
 import License from "../../components/License"
 import MCQ from "../../components/mcq/MCQ"
+import TSNoteWrapper from "../../components/TSNoteWrapper"
 
 <HomeLink />
 
@@ -74,13 +75,20 @@ You can run it using the green play button in the top right. It should print "el
   modelsInfo={[{"value":"const hello = (greeting) => {console.log(greeting)}\r\nhello(\"ello mate\")","filename":"noError.js","language":"javascript"}]}
 />
 
+
+
 When we try to run the code in TypeScript it says <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
 Parameter 'greeting' implicitly has an 'any' type.</code>
+
+<TSNoteWrapper>
 
 <Editor
   id="-99"
   modelsInfo={[{"value":"const hello = (greeting) => {console.log(greeting)}\r\nhello(\"ello mate\")","filename":"yesError.ts","language":"typescript"}]}
 />
+
+</TSNoteWrapper>
+
 
 The error happened because TypeScript wanted us to give it more information. It wanted to know if our greeting was 
 a word or if it was a number. Since we didn't specify this, TypeScript got upset with us.

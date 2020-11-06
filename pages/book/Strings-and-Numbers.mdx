@@ -3,7 +3,35 @@ import EditorWrapper from "../../components/editorWrapper/EditorWrapper";
 import HomeLink from "../../components/HomeLink"
 import License from "../../components/License"
 
+
 # Strings and Numbers
+
+## Static vs. Dynamic Typing
+
+There are different *types* of values, words like `"word"` or numbers like `2`. Technically the type of `"word"` is *string*, not word. 
+We can ask for the type of a value. 
+
+<Editor
+  id="10"
+  modelsInfo={[{"filename":"typeof.js","value":"let fromLet = \"from let\"\r\nconst fromConst = \"from const\"\r\nfromLet = \"reassign let\"\r\nconsole.log(fromLet)\r\nfromConst = \"this will cause an error\"","language":"javascript"}]}
+/>
+
+You might not want to write `console.log(typeof variable)` to find out the type of your variable. Fortunately, you can hover over a variable 
+with your cursor to find the type of the variable.
+
+<Editor
+  id="15"
+  modelsInfo={[{"filename":"hover.js","value":"let fromLet = \"from let\"\r\nconst fromConst = \"from const\"\r\nfromLet = \"reassign let\"\r\nconsole.log(fromLet)\r\nfromConst = \"this will cause an error\"","language":"javascript"}]}
+/>
+
+You should see this when you hover over `hoverString`:
+
+<img
+style={{margin: "0 auto"}}
+  className="self-center flex-1 mt-0 mb-0"
+  src="/JSTSbook/Variables/hoverInfo.png"
+  alt="ts error"
+/>
 
 ## Declaring Variables
 

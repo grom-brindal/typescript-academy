@@ -1,0 +1,271 @@
+import Editor from "../../components/editor/Editor";
+import EditorWrapper from "../../components/editorWrapper/EditorWrapper";
+import HomeLink from "../../components/HomeLink";
+import License from "../../components/License";
+import TS from "../../components/TSNoteWrapper";
+import MCQ from "../../components/mcq/MCQ"
+import Markdown from "../../components/mcq/markdown"
+
+
+# Variables in TypeScript and JavaScript
+
+## Values
+
+A `value` is a piece of information stored in your
+computer. Maybe the information is the words `"I'm a word value!"`, or maybe it is just the number `2`.
+There are different _types_ of values like words or numbers, we discuss this in the next section.
+
+<Editor
+  id="adfsdh"
+  modelsInfo={[
+    {
+      filename: "values.js",
+      value:
+        'console.log("I\'m a word value")\r\nconsole.log(2) // 👈 That is a number value',
+      language: "javascript",
+    },
+  ]}
+/>
+
+## Declaring Variables
+
+Variables let you store a value and reuse it in different parts of your code.
+The two good ways to _declare_ a variable are with `let` and `const`.
+
+<Editor
+  id="4"
+  modelsInfo={[
+    {
+      filename: "makeVars.js",
+      value:
+        'let var1 = "from let"\r\nconst var2 = "from const"\r\n//variables are stored in the variable names\r\nconsole.log(var1)\r\n//variables help you use the same value multiple times\r\nconsole.log(var2)\r\nconsole.log(var2)',
+      language: "javascript",
+    },
+  ]}
+/>
+
+You cannot declare a variable twice, run the code to see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+SyntaxError: Identifier 'var1' has already been declared</code>
+
+<Editor
+  id="-3"
+  modelsInfo={[
+    {
+      filename: "noDoubleDeclare.js",
+      value: 'let var1 = "declare once"\r\nlet var1 = "declare twice"',
+      language: "javascript",
+    },
+  ]}
+/>
+
+TypeScript tells you that the code will not work **BEFORE** you run the code. Notice that the file is a TypeScript file,
+pay attention to this when using this website! We've added a blue border to make this more noticeable.
+Hover your cursor over `var1` to see the error message.
+
+<TS>
+
+
+<Editor
+  id="-4"
+  modelsInfo={[
+    {
+      filename: "noDoubleDeclare.ts",
+      value: 'let var1 = "declare once"\r\nlet var1 = "declare twice"',
+      language: "typescript",
+    },
+  ]}
+/>
+
+</TS>
+
+
+You should see something like this:
+
+<img
+  style={{ margin: "0 auto" }}
+  className="self-center flex-1 mt-0 mb-0"
+  src="/JSTSbook/VarsAndStrings/TS-redeclare-error.png"
+  alt="ts error"
+/>
+
+If you run the code you get the same error, but phrased differently than before, <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+Cannot redeclare block-scoped variable 'var1'.</code>
+
+On this site the TypeScript editors all share variable names when checking for duplicate declarations.
+
+<TS>
+  <Editor
+    id="20"
+    modelsInfo={[
+      {
+        filename: "sharedDeclarations.ts",
+        value: 'let var1 = "The file above me causes the error."',
+        language: "typescript",
+      },
+    ]}
+  />
+</TS>
+
+## Assigning Variables
+
+After you declare a variable using `let` you can **assign** the variable by setting it equal to another value WITHOUT saying **let** again.
+
+<Editor
+  id="-2"
+  modelsInfo={[
+    {
+      filename: "reassign.js",
+      value:
+        'let var1 = "Use let to declare var1"\r\nvar1 = "no let the second time you use the variable!"\r\nconsole.log(var1)',
+      language: "javascript",
+    },
+  ]}
+/>
+
+### let vs. const
+
+Sometimes things shouldn't change, you can enforce and communicate this by using `const`.
+
+<Editor
+  id="5"
+  modelsInfo={[
+    {
+      filename: "goodConst.js",
+      value:
+        'let age = "10" //age can change\r\nconst birthday = "April 1" //birthday can\'t change',
+      language: "javascript",
+    },
+  ]}
+/>
+
+The difference between `let` and `const` is that you can reassign `let` but not `const`. Run the code below to see <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
+TypeError: Assignment to constant variable.</code> Notice that `fromLet` gets printed before the error because the error happens after the `console.log`.
+
+<Editor
+  id="6"
+  modelsInfo={[
+    {
+      filename: "cantReassignConst.js",
+      value:
+        'let fromLet = "from let"\r\nconst fromConst = "from const"\r\nfromLet = "reassign let"\r\nconsole.log(fromLet)\r\nfromConst = "this will cause an error"',
+      language: "javascript",
+    },
+  ]}
+/>
+
+TypeScript again shows us the error on the screen without us running the code. Hover your cursor over the error for more information.
+Run the code to see an error, but this time the `console.log` in line 4 doesn't run. This is because TypeScript checks for
+any red squiggly lines (syntax errors) before it runs your code.
+
+<TS>
+  <Editor
+    id="7"
+    modelsInfo={[
+      {
+        filename: "cantReassignConst.ts",
+        value:
+          'let fromLet = "from let"\r\nconst fromConst = "from const"\r\nfromLet = "reassign let"\r\nconsole.log(fromLet)\r\nfromConst = "this will cause an error"',
+        language: "typescript",
+      },
+    ]}
+  />
+</TS>
+
+### Assignment and Basic Types
+
+JavaScript lets you declare a variable as a word and then assign it to a number.
+
+<Editor
+  id="10"
+  modelsInfo={[
+    {
+      filename: "wordToNum.js",
+      value:
+        'let word = "word"\r\nword = 2+2 // word -> number\r\nconsole.log(word) //Sweet, JavaScript is a calculator!',
+      language: "javascript",
+    },
+  ]}
+/>
+
+When I hover over `word` in `console.log(word)` it tells me that the word is a _string_ of letters (A.K.A. words).
+
+<img
+  style={{ margin: "0 auto" }}
+  className="self-center flex-1 mt-0 mb-0"
+  src="/JSTSbook/Variables/badJsHoverInfo.png"
+  alt="ts error"
+/>
+
+It would be nice if the hover information told me that `word` a _number_ at the time that it is printed, but it just
+tells me that when the variable was declared it was a string. This could confuse a coworker who thinks your `word` variable is a string and gets an error
+when they try to find how many characters are in word.
+
+<Editor
+  id="11"
+  modelsInfo={[
+    {
+      filename: "countChars.js",
+      value:
+        'let word = "word"\r\nconsole.log(word.length) // 4 characters\r\nword = 2+2\r\nconsole.log(word.length) //undefined',
+      language: "javascript",
+    },
+  ]}
+/>
+
+To prevent your coworker from getting a mysterious `undefined` length of his word, TypeScript prevents you from reassigning `word` to a
+_number_ because it was initially a _string_.
+
+<TS>
+  <Editor
+    id="15"
+    modelsInfo={[
+      {
+        filename: "wordToNum.ts",
+        value: 'let word = "word"\r\nword = 2+2 // word -> number',
+        language: "typescript",
+      },
+    ]}
+  />
+</TS>
+
+This can be annoying. This annoyance is useful because it prevents you from breaking the hover information.
+Otherwise you might hover over something and assume it is a string when it is
+not. There are ways of reassigning variables to different types in TypeScript by slightly modifying the code, this is discussed
+when we get deeper into TypeScript.
+
+---
+
+## Exercises
+
+<ol>
+  <li>
+    <div style={{marginBottom: "8px"}}>
+    <Markdown content={"Declare a variable `a` of type *number* using `let`, also declare a variable `b` of type *string* using `const`"} />
+    </div>
+    <EditorWrapper
+  id="20"
+  modelsInfo={[
+    { filename: "1.js", value: "", language: "javascript" },
+    {
+      notInitial: true,
+      readOnly: true,
+      tested: true,
+      value:
+        'import "1"\r\nconsole.log("test: a and b are both defined")\r\nif(typeof a === "undefined") {\r\n  throw "a is not defined"\r\n}\r\nif(typeof b === "undefined") {\r\n  throw "b is not defined"\r\n}\r\nconsole.log("test: a is a number, b is a string")\r\nif(typeof a !== "number") {\r\n  throw "a is not of type number"\r\n}\r\nif(typeof b !== "string") {\r\n  throw "b is not of type string"\r\n}\r\nconsole.log("test: a declared with let, b declared with const")\r\ntry {\r\n  a = "hello"\r\n} catch (e) {\r\n  throw "a was declared using const"\r\n}\r\ntry {\r\n  b = 10\r\n  throw "b is not declared with const"\r\n} catch (e) {\r\n  if(e === "b is not declared with const") {\r\n    throw e\r\n  } \r\n}\r\n\r\nconsole.log("Problem solved")',
+      filename: "test1.js",
+      language: "javascript",
+    },
+  ]}
+/>
+  </li>
+  <li>
+    <MCQ info={{"promptText":"Which of the following variables should be declared using `const`?","solutionText":"The number of hairs on your head and your age will both change over time, they should be declared with `let`. Your birthday doesn't change, declare that using `const`.","answersText":["The number of hairs on your head","Your birthday","Your age"],"correctIndex":1}} />
+  </li>
+  <li>
+    <MCQ info={{"promptText":"Which is a reason for TypeScript raising an error when you declare a variable as a *number* and then assign it to a *string*?","solutionText":"This is NOT an error in JavaScript. It does prevent misleading hover information, as discussed in this section.","answersText":["Because this is also an error in JavaScript","Because this prevents misleading hover information"],"correctIndex":1}} />
+  </li>
+</ol>
+
+<hr />
+
+<License />

@@ -15,7 +15,7 @@ body {
   right: 0;
 }
 
-.console li::before {
+.log li::before {
   display: none;
 }
 
