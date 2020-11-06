@@ -5,33 +5,36 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="prose">
-      <div className={styles.container}>
-        book
-        <ol>
-          <Link href="/book/getting-started">
-            <li>
-              <a>Get started with TypeScript Academy</a>
-            </li>
-          </Link>
-        </ol>
-        <ol>
-          <Link href="/book/variables">
-            <li>
-              <a>Values and Variables</a>
-            </li>
-          </Link>
-        </ol>
-      </div>
-      <div className={styles.container}>
-        Articles
-        <ol>
-          <Link href="/WhyTypeScript">
-            <li>
-              <a>Why use TypeScript</a>
-            </li>
-          </Link>
-        </ol>
+    <div className={styles.container}>
+      <div>
+        writing
+        <ul>
+          <li>
+            book
+            <ol>
+              <Link href="/book/Getting-Started">
+                <li>
+                  <a>Get started with TypeScript Academy</a>
+                </li>
+              </Link>
+              <Link href="/book/Variables">
+                <li>
+                  <a>Variables</a>
+                </li>
+              </Link>
+            </ol>
+          </li>
+          <li>
+            misc
+            <ol>
+              <Link href="/WhyTypeScript">
+                <li>
+                  <a>Why use TypeScript</a>
+                </li>
+              </Link>
+            </ol>
+          </li>
+        </ul>
       </div>
     </div>
   );
