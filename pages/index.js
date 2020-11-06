@@ -7,16 +7,28 @@ export default function Home() {
   return (
     <div className="prose">
       <div className={styles.container}>
-        Completed Articles
+        book
+        <ol>
+          <Link href="/book/getting-started">
+            <li>
+              <a>Get started with TypeScript Academy</a>
+            </li>
+          </Link>
+        </ol>
+        <ol>
+          <Link href="/book/variables">
+            <li>
+              <a>Values and Variables</a>
+            </li>
+          </Link>
+        </ol>
+      </div>
+      <div className={styles.container}>
+        Articles
         <ol>
           <Link href="/WhyTypeScript">
             <li>
               <a>Why use TypeScript</a>
-            </li>
-          </Link>
-          <Link href="/JSTSbook/getting-started">
-            <li>
-              <a>Getting started</a>
             </li>
           </Link>
         </ol>
