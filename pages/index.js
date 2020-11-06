@@ -14,12 +14,14 @@ export default function Home() {
             <ol>
               <Link href="/book/Getting-Started">
                 <li>
-                  <a>Get started with TypeScript Academy</a>
+                  <a style={{ cursor: "pointer" }}>
+                    Get started with TypeScript Academy
+                  </a>
                 </li>
               </Link>
               <Link href="/book/Variables">
                 <li>
-                  <a>Variables</a>
+                  <a style={{ cursor: "pointer" }}>Variables</a>
                 </li>
               </Link>
             </ol>
@@ -29,7 +31,7 @@ export default function Home() {
             <ol>
               <Link href="/WhyTypeScript">
                 <li>
-                  <a>Why use TypeScript</a>
+                  <a style={{ cursor: "pointer" }}>Why use TypeScript</a>
                 </li>
               </Link>
             </ol>
