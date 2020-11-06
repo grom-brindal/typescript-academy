@@ -33,9 +33,6 @@ export default function EditorWrapper({
   const [submissionCount, setSubmissionCount] = useState(0);
   //successCount triggers effect in parent. I wonder what the best pattern for this is?
   const [successCount, setSuccessCount] = useState(0);
-  useEffect(() => {
-    console.log(successCount + id);
-  }, [successCount]);
   return (
     <div>
       <Editor

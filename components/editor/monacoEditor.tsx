@@ -22,7 +22,7 @@ import {
   setDynamicHeight,
   setModelsFromInfo,
   setTheme,
-  setRunnerModel,
+  setRunnerModel
 } from "./mountFunctions";
 import runFile, { runTestFile } from "./utils/runFile";
 import useCtrlRunFile from "./hooks/useCtrlRunFile"
@@ -46,7 +46,7 @@ function App({
   onSuccess,
   onFailure,
 }: MonacoEditorProps) {
-  const [ctrlCounter, setControlCounter] =  useState(0)
+  const [ctrlCounter, setControlCounter] = useState(0);
   const [height, setHeight] = useState(20);
   const [monacoInstance, setMonacoInstance] = useMonaco();
   const [selectedIdx, setSelectedIdx] = useModelIndex();
@@ -65,12 +65,17 @@ function App({
       setTheme(monaco);
       setMonacoInstance(monaco);
       editorCallbackRef(editor);
-      setModelsFromInfo(modelsInfo, monaco, editor, setModels, setSelectedIdx);
+      setModelsFromInfo(
+        modelsInfo,
+        monaco,
+        editor,
+        setModels,
+        setSelectedIdx,
+      );
       setRunnerModel(monaco, setModels);
       //Trigger useEffect with the control counter
-      editor.addCommand(
-        monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
-        () => setControlCounter(count => count + 1)
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () =>
+        setControlCounter((count) => count + 1)
       );
       monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
       let options = monaco.languages.typescript.javascriptDefaults.getCompilerOptions();
@@ -84,10 +89,10 @@ function App({
 
   //Gets triggered on ctrl+enter, hack to avoid getting trapped in closures.
   useEffect(() => {
-    if(ctrlCounter > 0){
-      runFile(id, monacoInstance, models, selectedIdx, setConsoleMessages)
+    if (ctrlCounter > 0) {
+      runFile(id, monacoInstance, models, selectedIdx, setConsoleMessages);
     }
-  }, [ctrlCounter])
+  }, [ctrlCounter]);
 
   //Run tests when submission count increases//
   useEffect(() => {
