@@ -12,8 +12,8 @@ import Markdown from "../../components/mcq/markdown"
 ## Values
 
 A `value` is a piece of information stored in your
-computer. Maybe the information is the words `"I'm a word value!"`, or maybe it is just the number `2`.
-There are different _types_ of values like words or numbers, we discuss this in the next section.
+computer. Maybe the information is the string of words `"I'm a word value!"`, or maybe it is just the integer number 2.
+There are different _types_ of values like words or integers, we discuss this in the next section.
 
 <Editor
   id="adfsdh"
@@ -31,6 +31,9 @@ There are different _types_ of values like words or numbers, we discuss this in 
 
 Variables let you store a value and reuse it in different parts of your code.
 The two good ways to _declare_ a variable are with `let` and `const`.
+
+[Tell me what the difference between these are, or only introduce let and not const.]
+
 
 <Editor
   id="4"
@@ -58,7 +61,7 @@ SyntaxError: Identifier 'var1' has already been declared</code>
   ]}
 />
 
-TypeScript tells you that the code will not work **BEFORE** you run the code. Notice that the file is a TypeScript file,
+TypeScript tells you that the code will not work **BEFORE** you run the code. Notice that the file is a TypeScript file, [it is not a .ts, though I believe you have mentioned this in your emails]
 pay attention to this when using this website! We've added a blue border to make this more noticeable.
 Hover your cursor over `var1` to see the error message.
 
@@ -87,6 +90,14 @@ You should see something like this:
   src="/JSTSbook/VarsAndStrings/TS-redeclare-error.png"
   alt="ts error"
 />
+
+[The "Cannot redeclare..." phrase occurs twice. If you are going to provide sample output I would recommend it being identical to the IntelliSense output initially, and then maybe point out which bits matter for what you are discussing.]
+
+[Ah, I now see that your sample output is the exact same if you hover over the second var1. If you hover over the first var1 then you get a double error message. There is also some bit about noDoubleDeclare.ts so maybe either explain that, state that it should be ignored, or reiterate what you care about (ie. your current sample output)]
+
+[Also, when I run this block of code, I get the "noDoubleDeclare.ts: Cannot..." error rather than the just "Cannot..." error.]
+
+[Does the sharedDeclarations.ts reset between browser windows on an account? Idk it just seems bizarre. Can I pass variables between editor windows?] [Perhaps this would be a good point to discuss how tabs work in your editor.]
 
 If you run the code you get the same error, but phrased differently than before, <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
 Cannot redeclare block-scoped variable 'var1'.</code>
@@ -122,7 +133,11 @@ After you declare a variable using `let` you can **assign** the variable by sett
   ]}
 />
 
+[In all the error-prone tabs you should have console.log() statements as if they were going to work.]
+
 ### let vs. const
+
+[Ah I see, if you are going to explain the difference here but introduce let and const way at the beginning, you should mention that you will be explaining the difference later.]
 
 Sometimes things shouldn't change, you can enforce and communicate this by using `const`.
 
@@ -147,15 +162,18 @@ TypeError: Assignment to constant variable.</code> Notice that `fromLet` gets pr
     {
       filename: "cantReassignConst.js",
       value:
-        'let fromLet = "from let"\r\nconst fromConst = "from const"\r\nfromLet = "reassign let"\r\nconsole.log(fromLet)\r\nfromConst = "this will cause an error"',
+        'let fromLet = "from let"\r\nconst fromConst = "from const"\r\nfromLet = "Since I am a let variable, I was reassigned!"\r\nconsole.log(fromLet)\r\nfromConst = "Can't reassign me! This will cause an error"',
       language: "javascript",
     },
   ]}
 />
 
+[I would request that when you hit the reset button on the editor (the clock thing in the middle) that the error underneath disappear. It currently stays even if you reset the editor.]
+
+
 TypeScript again shows us the error on the screen without us running the code. Hover your cursor over the error for more information.
 Run the code to see an error, but this time the `console.log` in line 4 doesn't run. This is because TypeScript checks for
-any red squiggly lines (syntax errors) before it runs your code.
+any red squiggly lines (syntax errors) before it runs your code. [nice]
 
 <TS>
   <Editor
@@ -173,7 +191,7 @@ any red squiggly lines (syntax errors) before it runs your code.
 
 ### Assignment and Basic Types
 
-JavaScript lets you declare a variable as a word and then assign it to a number.
+JavaScript lets you declare a variable as a word and then change its type to a number if you reassign it as a number.
 
 <Editor
   id="10"
@@ -196,9 +214,9 @@ When I hover over `word` in `console.log(word)` it tells me that the word is a _
   alt="ts error"
 />
 
-It would be nice if the hover information told me that `word` a _number_ at the time that it is printed, but it just
-tells me that when the variable was declared it was a string. This could confuse a coworker who thinks your `word` variable is a string and gets an error
-when they try to find how many characters are in word.
+It would be nice if the hover information told me that `word` was a _number_ at the time that it is printed, but it only
+tells me that when it was declared it was a string. This could confuse a coworker who thinks your `word` variable is a string and gets an error
+when they try to use it as a word, eg. if they were to try and find out how many characters are in the variable word.
 
 <Editor
   id="11"
@@ -233,9 +251,17 @@ Otherwise you might hover over something and assume it is a string when it is
 not. There are ways of reassigning variables to different types in TypeScript by slightly modifying the code, this is discussed
 when we get deeper into TypeScript.
 
+[Okay recognize, but it better be easy to change a number into a string. My bread and butter is creating filenames that are:
+for i in range(100):
+  with open('filename_' + str(i) + '.txt', 'w') as f:
+    f.write('I am a sample file')
+kna'mean? I guess TS is for doing different things than python, sure sure.]
+
 ---
 
 ## Exercises
+[Don't give me a blank editor, it is confusing where to click to begin]
+
 
 <ol>
   <li>
@@ -267,5 +293,8 @@ when we get deeper into TypeScript.
 </ol>
 
 <hr />
+
+[I think the logical progression of this chapter was great. It clearly broke down a key component of TypeScript. Maybe the value of this could be elaborated on, right now you have only mentioned that someone might try and find the number of characters in an integer, perhaps framing these within hypothetical examples of when this could go wrong would help drive the point home. I don't feel like any points were belabored in this chapter, it was clearly presented and I learned what I needed to.]
+
 
 <License />
