@@ -19,40 +19,19 @@ style={{margin: "0 auto"}}
 ## What is JavaScript?
 
 JavaScript is a programming language that can run inside a web browser. 
-Web browsers don't generally run Python or Java so it is necessary for web developers to know JavaScript. 
-JavaScript also runs outside the web browser. JavaScript should cover your needs as a web developer. 
+Web browsers don't generally run other common programming languages, so it is necessary for web developers to know JavaScript. 
+JavaScript can also run outside the web browser. JavaScript should cover your needs as a web developer in the foreseeable future. 
+
 
 ### ECMAScript?
 
-JavaScript is a language that has changed over time. The organization responsible for making changes to JavaScript is 
-Ecma International, formerly known as the European Computer Manufacturers Association (ECMA). 
-A new JavaScript specification has been coming out every year for the last few years. The specification 
-is actually called the ECMAScript specification. Usually JavaScript and ECMAScript can be used interchangeably.
+JavaScript is a language that has changed over time. Naturally, as programming languages evolve, some features become depricated and some old browsers don't run the latest version. The last couple versions of JavaScript are ES5 and ES6, these are the most common types you will see around the web. All major browsers work with ES5 (ECMAScript 2011), but not all browsers--most notably Internet Explorer--work well with ES6 (ECMAScript 2015). If you're using Internet Explorer you will have probably noticed that this website doesn't work for you since I use ES6 sometimes. 
 
-JavaScript is a general way of talking about the language, if you want to be specific about which specification
-you are talking about say something like "ECMAScript 2020". The naming conventions are confusing. 
-ES6, ES2015, and ECMAScript 2015 all refer to the 6th edition of the ECMAScript
-specification, ECMAScript 2015.
-
-### Differences in browsers
-
-Because there are multiple versions of JavaScript, different web browsers run different versions. To be more precise, 
-ECMAScript is a specification and the web browser is responsible for implementing its own JavaScript engine based on 
-the specification.
-
-All major browsers work with ECMAScript 2011 (ES5) but not all browsers work well with ECMAScript 2015 (ES6), most 
-notably Internet Explorer. This website shouldn't work on Internet Explorer because I used an ES6 feature.
-
-### Transpilation
-
-There is a program called Babel that takes new JavaScript and turns it into old ES5 JavaScript, usually this is done 
-to run your new code on old browsers.
-The process of turning one programming language into a similar language is called *transpilation*.
+[note: I think all the things discussed are definitely worthy of discussion, but not as the first thing you are introducing to new JavaScript users. Perhaps consider postponing discussion of transpilation, the ECMA, and the specifics of naming conventions for a different chapter.]
 
 ## What is TypeScript?
 
-Just like we can take new JavaScript and turn it into old JavaScript, we can take a programming language called 
-TypeScript and transpile it to JavaScript. TypeScript doesn't run in web browsers, so this conversion is necessary.
+If you really wanted, there are ways of turning new JavaScript into old JavaScript if you are hellbent on using Internet Explorer. But what we are more interested in is a programming language called TypeScript which is essentially a skin for JavaScript that makes programming far more intuitive [replace this phrase with a one-clause tagline for why TS]. TypeScript itself doesn't run in browsers, so this conversion is necessary: 
 
 <img
 style={{margin: "0 auto"}}
@@ -61,13 +40,12 @@ style={{margin: "0 auto"}}
           alt="ts error"
         />
 
-In JavaScript errors happen while the program is executing, these are called runtime errors. 
-In TypeScript errors can happen during the conversion from 
-JavaScript to TypeScript, before any JavaScript has been executed. These are called *compile* time errors.
+The conversion from TypeScript to JavaScript is not usually seemless. If you are just using JavaScript, your usual sorts of errors happen while the program is executing. These are *runtime* errors. Another type of error that you will run into when using TypeScript is during the translation (that is, transpilation, we'll talk more about that later) to JavaScript. If there is an error in the conversion, you will run into a *compile* time error. [Question, what is the difference between a compile-time error and a compile error. Also what is the difference between a runtime time error and a runtime error?]
+
 
 ### Your first TypeScript Error
 
-Here is valid JavaScript, don't worry about what it does. 
+Here is some valid JavaScript, don't worry about what it does. 
 You can run it using the green play button in the top right. It should print "ello mate".
 
 <Editor
@@ -80,6 +58,8 @@ You can run it using the green play button in the top right. It should print "el
 When we try to run the code in TypeScript it says <code style={{backgroundColor: "#290000", color: "#FF8080", borderTop: "1px solid #5B0000", borderBottom: "1px solid #5B0000"}}>
 Parameter 'greeting' implicitly has an 'any' type.</code>
 
+[Here it should be mentioned what time of error this is. It is a compile time error, right? You just told me about the two main types of errors so you should connect that with the exercise/demonstration here.] 
+
 <TSNoteWrapper>
 
 <Editor
@@ -91,12 +71,12 @@ Parameter 'greeting' implicitly has an 'any' type.</code>
 
 
 The error happened because TypeScript wanted us to give it more information. It wanted to know if our greeting was 
-a word or if it was a number. Since we didn't specify this, TypeScript got upset with us.
+a word or if it was a number. Since we didn't specify this, TypeScript got upset with us. This demonstrates the key advantage of using TypeScript rather than JavaScript directly. 
 
 ### IntelliSense
 
 
-You can hover over (put your cursor on top of) the red squiggly lines under 
+Another advantage of using TypeScript rather than JavaScript is the IntelliSense functionality. You can hover over (put your cursor on top of) the red squiggly lines under 
 `greeting` in line 1 to see a popup.
 
 <Editor
@@ -113,16 +93,16 @@ style={{margin: "0 auto"}}
           alt="ts error"
         />
 
-This is called **IntelliSense**. "IntelliSense" is the things your editor helps you with in 
-Visual Studio Code. The main reason 
+This is called **IntelliSense**. "IntelliSense" is the remarkable ability to snag bugs before they are run in your code along with helpful information pointing you in the direction of how to fix them. The main reason 
 TypeScript asks for more information than JavaScript is to help the editor help you with improved IntelliSense. 
 TypeScript forces you to help the editor help you.
 More on this throughout the book.
 
 ### TypeScript in This Course
 
-The authors of this book love TypeScript, so we teach it. We use both 
-TypeScript and JavaScript files, you should be comfortable working in both languages. TypeScript and JavaScript are very similar.
+If you can't tell, the authors of this book love TypeScript, so we will be teaching it. We use both 
+TypeScript and JavaScript files, so by the end of this book you should be comfortable working in both languages. You will find this to not be as difficult as you think, as TypeScript and JavaScript are very similar.
+[Don't mean to be a pansy about things, but I like some reassurances in my textbooks.]
 
 ## console.log
 
@@ -150,7 +130,13 @@ Sometimes we want to say something inside the code without it effecting how the 
   modelsInfo={[{"filename":"comments.ts","value":"// Single line comment\r\nconsole.log(\"Code not impacted by comments\")\r\n/* Multiline comment\r\n         _          __________                              _,\r\n     _.-(_)._     .\"          \".      .--\"\"--.          _.-{__}-._\r\n   .'________'.   | .--------. |    .'        '.      .:-'`____`'-:.\r\n  [____________] /` |________| `\\  /   .'``'.   \\    /_.-\"`_  _`\"-._\\\r\n  /  / .\\/. \\  \\|  / / .\\/. \\ \\  ||  .'/.\\/.\\'.  |  /`   / .\\/. \\   `\\\r\n  |  \\__/\\__/  |\\_/  \\__/\\__/  \\_/|  : |_/\\_| ;  |  |    \\__/\\__/    |\r\n  \\            /  \\            /   \\ '.\\    /.' / .-\\                /-.\r\n  /'._  --  _.'\\  /'._  --  _.'\\   /'. `'--'` .'\\/   '._-.__--__.-_.'   \\\r\n /_   `\"\"\"\"`   _\\/_   `\"\"\"\"`   _\\ /_  `-./\\.-'  _\\'.    `\"\"\"\"\"\"\"\"`    .'`\\\r\n(__/    '|    \\ _)_|           |_)_/            \\__)|        '       |   |\r\n   via https://textfancy.com/gallery/\r\n   */","language":"typescript"}]}
 />
 
+[As a comment on the pacing of things, I find it weird that runtime and compile errors would be explained before comments in code would be explained. Just that, compile and runtime errors are more intimidating and take more knowledge to understand, whereas comments are the second thing one learns after the print statement (exactly as you have it here, which is great). So maybe considering some restructuring to have the introduction introduce JavaScript and why one would want to use it, then introduce TypeScript and why one would want to use it, then introduce how to run your code editor, then introduce how to print, then how to comment, THEN IntelliSense, transpilation, and other stuff. If you're going to include a bunch of stuff about the terminology and versions of JavaScript I would prefer a dismissive tone to make it clear that knowledge of JavaScript version history is not necessary to complete this book.]
+
+[I now see that it messes up your problems. Perhaps these problems should be simpler and focused on printing and commenting and other baby activities considering half of this lesson is (rightfully) baby activities.]
+
 *** 
+
+
 
 ## Exercises
 
@@ -180,5 +166,5 @@ Sometimes we want to say something inside the code without it effecting how the 
 </ol>
 
 <hr />
-
+[Perhaps it is a good thing, but I notice that running the print statement in problem 4 causes the problem to automatically be graded. I think this is a good thing.]
 <License />
